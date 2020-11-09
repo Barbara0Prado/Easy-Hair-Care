@@ -62,6 +62,8 @@ public class Loading extends Application {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				
+				
 				Scene scene1 = new Scene(root1);
 
 				Stage secondStage = new Stage();
