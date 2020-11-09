@@ -10,6 +10,9 @@ public class EasyCareMain {
 		 * Interface loading (first initial splash screen)
 		 */
 		new Loading().launch(Loading.class,args);
+		
+		
+		//teste
 	}
 
 }
