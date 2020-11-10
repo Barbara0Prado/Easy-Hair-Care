@@ -11,7 +11,7 @@ import javafx.util.Duration;
 /*
  * Class fade effect added to be used on all transitions screens and loading screen
  */
-public class FadeEffect {
+public class Transition {
 
 	public static FadeTransition fade = new FadeTransition();
 
@@ -39,13 +39,18 @@ public class FadeEffect {
 	 * Pause transition function
 	 * Shows the spinning and next screen selected 
 	 */
-	public static void PauseTransitionFunction(final BorderPane borderA, final BorderPane borderB) {
-		PauseTransition pause = new PauseTransition(Duration.seconds(1));
+	public static void PauseTransitionAndSetElement(final BorderPane borderA, final BorderPane borderB, int seconds) {
+		PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
 		pause.setOnFinished(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				borderA.getChildren().setAll(borderB);
 			}
 		});
+		pause.play();
+	}
+	
+	public static void PauseTransitionOnly() {
+		PauseTransition pause = new PauseTransition(Duration.seconds(2));
 		pause.play();
 	}
 

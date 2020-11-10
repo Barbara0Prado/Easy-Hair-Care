@@ -12,7 +12,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="103.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../icons%20web/scissors.png" />
+                  <Image url="scissors.png" />
                </image>
             </ImageView>
          </children>

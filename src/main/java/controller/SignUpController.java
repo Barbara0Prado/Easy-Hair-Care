@@ -181,8 +181,13 @@ public class SignUpController {
 		if (passwordField.getLength() < 10) {
 			this.passwordLabel.setVisible(true);
 		}
-		if (comboField.getValue().equalsIgnoreCase("Location")) {
+		if (comboField.getValue() == null) {
 			this.locationLabel.setVisible(true);
+		} else {
+			if (comboField.getValue().equalsIgnoreCase("Location")) {
+
+				this.locationLabel.setVisible(true);
+			}
 		}
 	}
 

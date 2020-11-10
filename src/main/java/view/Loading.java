@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import controller.LoginController;
 import javafx.animation.PauseTransition;
@@ -13,7 +14,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import service.FadeEffect;
+import service.Database;
+import service.Transition;
 
 public class Loading extends Application {
 
@@ -35,7 +37,7 @@ public class Loading extends Application {
 		/*
 		 * Called fade effect until getting onto login screen
 		 */
-		FadeEffect.FadeTransitionEffect(root, 4000);
+		Transition.FadeTransitionEffect(root, 4000);
 
 		/*
 		 * Show the splash screen
@@ -49,34 +51,34 @@ public class Loading extends Application {
 		PauseTransition pause = new PauseTransition(Duration.seconds(3));
 		pause.setOnFinished(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-
 				/*
 				 * Loading the login.fxml, which contains the login interface
 				 * Set a controller
 				 */
-				Parent root1 = null;
+				Parent root = null;
 				FXMLLoader loader = new FXMLLoader();
 				loader.setController(new LoginController());
 				try {
-					root1 = FXMLLoader.load(getClass().getResource("login.fxml"));
+					root = FXMLLoader.load(getClass().getResource("login.fxml"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				
-				
-				Scene scene1 = new Scene(root1);
+				Scene scene1 = new Scene(root);
 
 				Stage secondStage = new Stage();
-
+				
 				secondStage.setTitle("Easy Hair Care");
 				secondStage.setResizable(false);
 				secondStage.setScene(scene1);
+
 
 				/*
 				 * Hide splash screen and show login screen
 				 */
 				primaryStage.hide();
 				secondStage.show();
+				
 			}
 		});
 		/*
