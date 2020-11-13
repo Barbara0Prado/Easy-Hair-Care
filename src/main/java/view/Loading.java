@@ -1,7 +1,6 @@
 package view;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import controller.LoginController;
 import javafx.animation.PauseTransition;
@@ -14,77 +13,79 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import service.Database;
+import service.LocFxml;
 import service.Transition;
 
 public class Loading extends Application {
 
-	@Override
-	public void start(final Stage primaryStage) throws IOException {
+    @Override
+    public void start(final Stage primaryStage) throws IOException {
 
-		/*
+        /*
 		 * Reading the loading.fxml It contains the splash screen
-		 */
-		final Parent root = FXMLLoader.load(getClass().getResource("loading.fxml"));
-		Scene scene = new Scene(root);
-		/*
+         */
+        Parent root = FXMLLoader.load(getClass().getResource(LocFxml.LOADING_SCREEN));
+        Scene scene = new Scene(root);
+        /*
 		 * Removed buttons and disabled resizable by using mouse
-		 */
-		primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setTitle("Easy Hair Care");
-		primaryStage.setResizable(false);
-		primaryStage.setScene(scene);
-		/*
+         */
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setTitle("Easy Hair Care");
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        /*
 		 * Called fade effect until getting onto login screen
-		 */
-		Transition.FadeTransitionEffect(root, 4000);
+         */
+        
+        //I think after compiling the effect gets awful (run directly on eclipse or netbeans works okay)
+        //Transition.FadeTransitionEffect(root, 4000);
 
-		/*
+        /*
 		 * Show the splash screen
-		 */
-		primaryStage.show();
+         */
+        primaryStage.show();
 
-		/*
+        /*
 		 * Added a pause transition to switch between (maybe update in the future to be
 		 * smooth)
-		 */
-		PauseTransition pause = new PauseTransition(Duration.seconds(3));
-		pause.setOnFinished(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				/*
+         */
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        pause.setOnFinished(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                /*
 				 * Loading the login.fxml, which contains the login interface
 				 * Set a controller
-				 */
-				Parent root = null;
-				FXMLLoader loader = new FXMLLoader();
-				loader.setController(new LoginController());
-				try {
-					root = FXMLLoader.load(getClass().getResource("login.fxml"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				Scene scene1 = new Scene(root);
+                 */
+                Parent root = null;
+                FXMLLoader loader = new FXMLLoader();
+                loader.setController(new LoginController());
+                try {
+                    root = FXMLLoader.load(getClass().getResource(LocFxml.LOGIN_SCREEN));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-				Stage secondStage = new Stage();
-				
-				secondStage.setTitle("Easy Hair Care");
-				secondStage.setResizable(false);
-				secondStage.setScene(scene1);
+                Scene scene1 = new Scene(root);
+
+                Stage secondStage = new Stage();
+
+                secondStage.setTitle("Easy Hair Care");
+                secondStage.setResizable(false);
+                secondStage.setScene(scene1);
 
 
-				/*
+                /*
 				 * Hide splash screen and show login screen
-				 */
-				primaryStage.hide();
-				secondStage.show();
-				
-			}
-		});
-		/*
+                 */
+                primaryStage.hide();
+                secondStage.show();
+
+            }
+        });
+        /*
 		 * Keep going
-		 */
-		pause.play();
-	}
+         */
+        pause.play();
+    }
 
 }
