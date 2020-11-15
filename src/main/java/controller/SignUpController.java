@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,11 +11,15 @@ import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import model.Account;
+import service.AccountDAOService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
@@ -49,6 +54,8 @@ public class SignUpController {
 
     @FXML
     private Label emailLabel;
+    
+    private boolean invalidEmail;
 
     @FXML
     private Label numberLabel;
@@ -58,6 +65,14 @@ public class SignUpController {
 
     @FXML
     private Label locationLabel;
+    
+    @FXML
+    private Label AccountExistsLabel;
+    
+    private AccountDAOService accountDAOService = new AccountDAOService();
+    
+    private final int MIN_CHARACTER = 10;
+    private final int MAX_CHARACTER = 35;
 
     /*
 	 * Pattern email (validation)
@@ -73,7 +88,7 @@ public class SignUpController {
         nameField.textProperty().addListener(new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (nameField.getLength() > 10) {
+                if (nameField.getLength() >= MIN_CHARACTER && nameField.getLength() <= MAX_CHARACTER) {
                     nameLabel.setVisible(false);
                 } else {
                     nameLabel.setVisible(true);
@@ -81,24 +96,49 @@ public class SignUpController {
 
             }
         });
+        nameField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent k) {
+               if (nameField.getLength() >= MAX_CHARACTER) {
+                  k.consume();
+               }
+            }
+        });
         emailField.textProperty().addListener(new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                Pattern pattern = Pattern.compile("^(.+)@(.+)$");
-                Matcher matcher = pattern.matcher(emailField.getText());
+                pattern = Pattern.compile("^(.+)@(.+)$");
+                matcher = pattern.matcher(emailField.getText());
 
-                if (emailField.getLength() < 10 || !matcher.matches()) {
+                if ( (emailField.getLength() <= MIN_CHARACTER  && emailField.getLength() <= MAX_CHARACTER) || !matcher.matches()) {
+                	invalidEmail = true;
                     emailLabel.setVisible(true);
                 } else {
+                	invalidEmail = false;
                     emailLabel.setVisible(false);
                 }
 
             }
         });
+        emailField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent k) {
+               if (emailField.getLength() >= MAX_CHARACTER) {
+                  k.consume();
+               }
+            }
+        });
+        phoneField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent k) {
+               char ar[] = k.getCharacter().toCharArray();
+               char ch = ar[k.getCharacter().toCharArray().length - 1];
+               if ((!(ch >= '0' && ch <= '9')) || phoneField.getLength() >= MIN_CHARACTER) {
+                  k.consume();
+               }
+            }
+        });
         phoneField.textProperty().addListener(new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (phoneField.getLength() > 10) {
+                if (phoneField.getLength() >= MIN_CHARACTER  && phoneField.getLength() <= MAX_CHARACTER) {
                     numberLabel.setVisible(false);
                 } else {
                     numberLabel.setVisible(true);
@@ -109,12 +149,19 @@ public class SignUpController {
         passwordField.textProperty().addListener(new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (passwordField.getLength() > 10) {
+                if (passwordField.getLength() >= MIN_CHARACTER && passwordField.getLength() <= MAX_CHARACTER) {
                     passwordLabel.setVisible(false);
                 } else {
                     passwordLabel.setVisible(true);
                 }
 
+            }
+        });
+        passwordField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent k) {
+               if (passwordField.getLength() >= MAX_CHARACTER) {
+                  k.consume();
+               }
             }
         });
         comboField.valueProperty().addListener(new ChangeListener<String>() {
@@ -128,16 +175,6 @@ public class SignUpController {
 
             }
         });
-    }
-
-    /*
-	 * Set warning in case of the field does not have more than 10 characters
-     */
-    @FXML
-    protected void handlenameFieldAction(ActionEvent event) throws IOException {
-        if (nameField.getLength() > 10) {
-            this.nameLabel.setVisible(false);
-        }
     }
 
     /*
@@ -168,27 +205,52 @@ public class SignUpController {
 	 * Set warning to the user if the fields are empty
      */
     @FXML
-    protected void handleSignUpButtonAction(ActionEvent event) throws IOException {
-        if (nameField.getLength() < 10) {
+    protected void handleSignUpButtonAction(ActionEvent event) throws IOException, SQLException {
+    	
+    	boolean error = false;
+    	
+        if (nameField.getLength() < MIN_CHARACTER) {
             this.nameLabel.setVisible(true);
+            error = true;
         }
-        if (emailField.getLength() < 10) {
+        if (emailField.getLength() < MIN_CHARACTER || invalidEmail == true) {
             this.emailLabel.setVisible(true);
+            error = true;
         }
-        if (phoneField.getLength() < 10) {
+        if (phoneField.getLength() <= 9) {
             this.numberLabel.setVisible(true);
+            error = true;
         }
-        if (passwordField.getLength() < 10) {
+        if (passwordField.getLength() < MIN_CHARACTER) {
             this.passwordLabel.setVisible(true);
+            error = true;
         }
+        if(toggleField.isSelected())
+        {
         if (comboField.getValue() == null) {
             this.locationLabel.setVisible(true);
+            error = true;
         } else {
             if (comboField.getValue().equalsIgnoreCase("Location")) {
 
                 this.locationLabel.setVisible(true);
+                error = true;
             }
         }
+        }
+        
+        if(error == false)
+        {
+        	Account account = new Account();
+        	account.setName(nameField.getText());
+        	account.setEmail(emailField.getText());
+        	account.setNumber(Integer.parseInt(phoneField.getText()));
+        	account.setPassword(passwordField.getText());
+        	
+        	this.AccountExistsLabel.setVisible(accountDAOService.saveAccount(account) == 0 ? true : false);
+        }
+        
+        
     }
 
 }

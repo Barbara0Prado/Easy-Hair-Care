@@ -27,7 +27,7 @@
       <AnchorPane prefHeight="400.0" prefWidth="316.0" BorderPane.alignment="CENTER">
          <children>
             <JFXButton onAction="#handleSignUpButtonAction" fx:id="signUpButton" layoutX="83.0" layoutY="322.0" prefHeight="32.0" prefWidth="154.0" style="-fx-background-color: #1E90FF;" text="Sign up" textFill="#5b1d1d" />
-            <TextField  onAction="#handlenameFieldAction" fx:id="nameField" layoutX="82.0" layoutY="132.0" promptText="Your login" />
+            <TextField fx:id="nameField" layoutX="82.0" layoutY="132.0" promptText="Full name" />
             <PasswordField fx:id="passwordField" layoutX="84.0" layoutY="248.0" promptText="Your password" />
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="52.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -64,6 +64,7 @@
             <Label fx:id="numberLabel" visible="false" layoutX="84.0" layoutY="233.0" prefHeight="18.0" prefWidth="233.0" text="You must enter a valid number" textFill="RED" />
             <Label fx:id="passwordLabel" visible="false" layoutX="84.0" layoutY="269.0" prefHeight="18.0" prefWidth="233.0" text="You must enter a valid password" textFill="RED" />
             <Label fx:id="locationLabel" visible="false" layoutX="85.0" layoutY="303.0" prefHeight="18.0" prefWidth="233.0" text="You must select the location" textFill="RED" />
+            <Label fx:id="AccountExistsLabel" visible="false" layoutX="80.0" layoutY="14.0" prefHeight="18.0" prefWidth="220.0" text="This account already exists!" textFill="RED" />
          </children>
       </AnchorPane>
    </center>

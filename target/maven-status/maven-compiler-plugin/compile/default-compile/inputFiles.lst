@@ -1,7 +1,8 @@
-C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\service\Database.java
-C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\service\LocFxml.java
 C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\main\EasyCareMain.java
 C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\controller\LoginController.java
+C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\service\DatabaseService.java
 C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\view\Loading.java
+C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\service\TransitionService.java
 C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\controller\SignUpController.java
-C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\service\Transition.java
+C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\controller\FXMLController.java
+C:\Users\marco\eclipse-workspace\EasyHairCare\Easy-Hair-Care\src\main\java\service\FXMLService.java
