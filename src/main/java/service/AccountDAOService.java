@@ -51,6 +51,42 @@ public class AccountDAOService {
 
 		return 0;
 	}
+	
+	public int saveAccountRole(Account account, int role) throws SQLException 
+	{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = DatabaseService.getDBConnection();
+			connection.setAutoCommit(false);
+			String query = "INSERT INTO `Barbara_2019143`.`AccountRole`(`idAccount`,`IdRole`) VALUES(?, ?);";
+			statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			statement.setInt(1, account.getId());
+			statement.setInt(2, role);
+			statement.executeUpdate();
+			connection.commit();
+		} catch (SQLException exception) {
+			exception.getMessage();
+			if (null != connection) {
+				connection.rollback();
+			}
+		} finally {
+			if (null != resultSet) {
+				resultSet.close();
+			}
+
+			if (null != statement) {
+				statement.close();
+			}
+
+			if (null != connection) {
+				connection.close();
+			}
+		}
+
+		return 0;
+	}
 
 
 }

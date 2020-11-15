@@ -26,8 +26,10 @@ public class DatabaseService {
 	 * Create table if it does not exist (can create database as well in case of not exist.
      */
     public static void CreateTable() {
+    	Connection connection = null;
+    	
         try {
-            Connection connection = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
+            connection = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
             Statement statement = connection.createStatement();
             //CREATE DATABASE IF NOT EXISTS
             String s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Account` (`id` INT auto_increment  PRIMARY KEY,`name` VARCHAR(45) NOT NULL,`email` VARCHAR(45) NOT NULL,`number` INT NOT NULL,`password` VARCHAR(45) NOT NULL,UNIQUE INDEX `id_UNIQUE` (`id` ASC),UNIQUE INDEX `email_UNIQUE` (`email` ASC));";
@@ -36,10 +38,25 @@ public class DatabaseService {
             statement.executeUpdate(s);
             s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`AccountRole` (`idAccount` INT NULL,`idRole` INT NULL,INDEX `idAccountKey_idx` (`idAccount` ASC),INDEX `idRoleKey_idx` (`idRole` ASC, `idAccount` ASC),CONSTRAINT `idAccount` FOREIGN KEY (`idAccount`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `Barbara_2019143`.`Role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
             statement.executeUpdate(s);
+            connection.setAutoCommit(false);
+            s = "INSERT INTO `Barbara_2019143`.`Role`(`id`,`name`)VALUES(0,'CUSTOMER');";
+            statement.executeUpdate(s);
+            s = "INSERT INTO `Barbara_2019143`.`Role`(`id`,`name`)VALUES(1,'PROVIDER');";
+            statement.executeUpdate(s);
+            s = "INSERT INTO `Barbara_2019143`.`Role`(`id`,`name`)VALUES(2,'ADMINISTRATOR');";
+            statement.executeUpdate(s);
+            connection.commit();
 
-        } catch (SQLException e) {
-        	System.out.println(e.getMessage());
-        }
+        } catch (SQLException exception) {
+			exception.getMessage();
+			if (null != connection) {
+				try {
+					connection.rollback();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
     }
 
     /*

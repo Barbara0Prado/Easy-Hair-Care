@@ -12,5 +12,6 @@ public class FXMLService {
     public static final String TRANSITION_SCREEN = "/fxml/transition.fxml";
     public static final String ERROR_DATABASE_SCREEN = "/fxml/errordatabase.fxml";
     public static final String ERROR_SCREEN = "/fxml/error.fxml";
+    public static final String LOCATION_SCREEN = "/fxml/location.fxml";
     
 }

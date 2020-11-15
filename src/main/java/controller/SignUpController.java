@@ -18,16 +18,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import model.Account;
 import service.AccountDAOService;
+import service.FXMLService;
+import service.TransitionService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-public class SignUpController {
+public class SignUpController extends FXMLController {
 
     /*
 	 * FXML annotation to be able to indetify the id's on fxml
      */
+    @FXML
+    private BorderPane borderSignUp;
+    
     @FXML
     private JFXButton signUpButton;
 
@@ -247,7 +253,32 @@ public class SignUpController {
         	account.setNumber(Integer.parseInt(phoneField.getText()));
         	account.setPassword(passwordField.getText());
         	
-        	this.AccountExistsLabel.setVisible(accountDAOService.saveAccount(account) == 0 ? true : false);
+        	int key = accountDAOService.saveAccount(account);
+        	
+        	this.AccountExistsLabel.setVisible(key == 0 ? true : false);
+        	
+        	signUpButton.setDisable(true);
+        	
+        	if(key > 0)
+        	{
+        		account.setId(key);
+        		accountDAOService.saveAccountRole(account, toggleField.isSelected() ? 1 : 0);
+        		
+                BorderPane border = FXMLLoaderInit(borderSignUp, FXMLService.TRANSITION_SCREEN, true);
+                
+                /*
+                 * Check later 
+                 */
+                final BorderPane borderSignup = FXMLLoaderInit(border, FXMLService.LOCATION_SCREEN, false);
+                
+
+                /*
+        		 * Pause transition while change all the components FXML
+                 */
+                TransitionService.PauseTransitionAndSetElement(border, borderSignup, 1);
+                
+                signUpButton.setDisable(false);
+        	}
         }
         
         
