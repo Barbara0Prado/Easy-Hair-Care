@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderLocation" fx:controller="controller.LocationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="306.0" style="-fx-background-color: #1E90FF;" BorderPane.alignment="CENTER">
          <children>
@@ -23,16 +23,16 @@
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="316.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton layoutX="83.0" layoutY="196.0" prefHeight="32.0" prefWidth="154.0" style="-fx-background-color: #1E90FF;" text="Dublin South" textFill="#5b1d1d" />
+            <JFXButton fx:id="buttonSouth" onAction="#handleSouthButtonAction" layoutX="83.0" layoutY="196.0" prefHeight="32.0" prefWidth="154.0" style="-fx-background-color: #1E90FF;" text="Dublin South" textFill="#5b1d1d" />
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="105.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="location.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="83.0" layoutY="235.0" prefHeight="32.0" prefWidth="154.0" style="-fx-background-color: #1E90FF;" text="Dublin North" textFill="#5b1d1d" />
-            <Label layoutX="103.0" layoutY="292.0" prefHeight="18.0" prefWidth="130.0" text="or search by name" />
-            <TextField layoutX="84.0" layoutY="309.0" style="-fx-border-color: #1E90FF;" />
-            <JFXButton layoutX="131.0" layoutY="348.0" prefHeight="31.0" prefWidth="58.0" style="-fx-background-color: #1E90FF;" text="Search" textFill="#5b1d1d" />
+            <JFXButton fx:id="buttonNorth" onAction="#handleNorthButtonAction" layoutX="83.0" layoutY="235.0" prefHeight="32.0" prefWidth="154.0" style="-fx-background-color: #1E90FF;" text="Dublin North" textFill="#5b1d1d" />
+            <Label visible="false" layoutX="103.0" layoutY="292.0" prefHeight="18.0" prefWidth="130.0" text="or search by name" />
+            <TextField visible="false" layoutX="84.0" layoutY="309.0" style="-fx-border-color: #1E90FF;" />
+            <JFXButton visible="false" layoutX="131.0" layoutY="348.0" prefHeight="31.0" prefWidth="58.0" style="-fx-background-color: #1E90FF;" text="Search" textFill="#5b1d1d" />
             <Label layoutX="106.0" layoutY="161.0" prefHeight="18.0" prefWidth="130.0" text="Select the location" />
          </children>
       </AnchorPane>

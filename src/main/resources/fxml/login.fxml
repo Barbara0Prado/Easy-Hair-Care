@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -43,6 +44,8 @@
             </ImageView>
             <Hyperlink fx:id="hyperlink" onAction="#handleCreateButtonAction" layoutX="79.0" layoutY="255.0" prefHeight="26.0" prefWidth="158.0" text="I do not have an account" />
             <JFXButton fx:id="connectButton" onAction="#handleSubmitButtonAction" layoutX="96.0" layoutY="215.0" prefHeight="32.0" prefWidth="103.0" text="Sign in" textFill="#5b1d1d"  style="-fx-background-color: #1E90FF;" />
+            <Label fx:id="accountLabel" visible="false" layoutX="71.0" layoutY="106.0" text="Login or password incorrect" textFill="#f20000" />
+            <Label fx:id="emailLabel" visible="false" layoutX="79.0" layoutY="156.0" text="You must enter a valid email" textFill="#f20000" />
          </children>
       </AnchorPane>
    </center>

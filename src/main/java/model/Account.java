@@ -10,7 +10,7 @@ public class Account implements Serializable {
 	private String name;
 	private String email;
 	private String password;
-	private int number;
+	private String number;
 	
 	public int getId() {
 		return id;
@@ -36,10 +36,10 @@ public class Account implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	

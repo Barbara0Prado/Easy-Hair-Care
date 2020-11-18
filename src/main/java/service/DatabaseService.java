@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -25,14 +26,16 @@ public class DatabaseService {
     /*
 	 * Create table if it does not exist (can create database as well in case of not exist.
      */
-    public static void CreateTable() {
+    public static void CreateTable() throws SQLException {
     	Connection connection = null;
+    	Statement statement = null;
+    	ResultSet resultSet = null;
     	
         try {
             connection = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
-            Statement statement = connection.createStatement();
-            //CREATE DATABASE IF NOT EXISTS
-            String s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Account` (`id` INT auto_increment  PRIMARY KEY,`name` VARCHAR(45) NOT NULL,`email` VARCHAR(45) NOT NULL,`number` INT NOT NULL,`password` VARCHAR(45) NOT NULL,UNIQUE INDEX `id_UNIQUE` (`id` ASC),UNIQUE INDEX `email_UNIQUE` (`email` ASC));";
+            statement = connection.createStatement();
+            //CREATE DATABASE/TABLE IF NOT EXISTS
+            String s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Account` (`id` INT auto_increment  PRIMARY KEY,`name` VARCHAR(45) NOT NULL,`email` VARCHAR(45) NOT NULL,`number` VARCHAR(45) NOT NULL,`password` VARCHAR(45) NOT NULL,UNIQUE INDEX `id_UNIQUE` (`id` ASC),UNIQUE INDEX `email_UNIQUE` (`email` ASC));";
             statement.executeUpdate(s);
             s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Role` (`id` INT NOT NULL,`Name` VARCHAR(45) NOT NULL,UNIQUE INDEX `id_UNIQUE` (`id` ASC), PRIMARY KEY (`id`));";
             statement.executeUpdate(s);
@@ -45,7 +48,12 @@ public class DatabaseService {
             statement.executeUpdate(s);
             s = "INSERT INTO `Barbara_2019143`.`Role`(`id`,`name`)VALUES(2,'ADMINISTRATOR');";
             statement.executeUpdate(s);
+            s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`AccountWaiting` ( `id` INT NOT NULL,`location` INT NOT NULL,`accepted` TINYINT NOT NULL, UNIQUE INDEX `id_UNIQUE` (`id` ASC), PRIMARY KEY (`id`), CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
+            statement.executeUpdate(s);
+            s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Provider` (`idProvider` INT NOT NULL,`location` INT NOT NULL,`Star` INT NOT NULL,PRIMARY KEY (`idProvider`),UNIQUE INDEX `idProvider_UNIQUE` (`idProvider` ASC),CONSTRAINT `idProvider` FOREIGN KEY (`idProvider`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
+            statement.executeUpdate(s);
             connection.commit();
+            resultSet = statement.getResultSet();
 
         } catch (SQLException exception) {
 			exception.getMessage();
@@ -57,12 +65,24 @@ public class DatabaseService {
 				}
 			}
 		}
+        finally {
+        	if (null != resultSet) {
+				resultSet.close();
+			}
+			if (null != statement) {
+				statement.close();
+			}
+
+			if (null != connection) {
+				connection.close();
+			}
+		}
     }
 
     /*
 	 * Get connection
      */
-    public static Connection getDBConnection() {
+    public static Connection getDBConnection() throws SQLException {
         Connection connection = null;
         
         /*
