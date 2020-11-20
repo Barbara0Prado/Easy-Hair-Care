@@ -7,39 +7,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.AccountLogged;
-<<<<<<< HEAD
 import model.AdminAcceptProvider;
 import model.Provider;
 
 public class ProviderDAOService {
 
-	public void selectAllProviders(int location) throws SQLException {
-
-=======
-import model.Provider;
-
-public class ProviderDAOService {
-	
-	public void selectAllProviders(int location) throws SQLException {
+public void selectAllProviders(int location) throws SQLException {
 		
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet;
 
-<<<<<<< HEAD
 		AccountLogged.providers.clear();
 
-		try {
-			connection = DatabaseService.getDBConnection();
-			String query = "SELECT Account.id, Provider.star, Account.name  FROM Provider INNER JOIN Account ON Provider.idProvider = Account.id where Provider.location = "
-					+ location;
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(query);
-			while (resultSet.next()) {
-				Provider provider = new Provider();
-
-=======
 		try {
 			connection = DatabaseService.getDBConnection();
 			String query = "SELECT Account.id, Provider.star, Account.name  FROM Provider INNER JOIN Account ON Provider.idProvider = Account.id where Provider.location = " + location;
@@ -49,14 +29,12 @@ public class ProviderDAOService {
 			{
 				Provider provider = new Provider();
 				
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 				provider.setIdProvider(resultSet.getInt(1));
 				provider.setLocation(location);
 				provider.setStar(resultSet.getInt(2));
 				provider.setName(resultSet.getString(3));
 				AccountLogged.providers.add(provider);
 			}
-<<<<<<< HEAD
 
 		} catch (SQLException exception) {
 			exception.printStackTrace();
@@ -70,7 +48,7 @@ public class ProviderDAOService {
 				connection.close();
 			}
 		}
-	}
+}
 
 	public void selectAllProviders() throws SQLException {
 
@@ -96,12 +74,6 @@ public class ProviderDAOService {
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 
-=======
-			
-		} catch (SQLException exception) {
-			exception.printStackTrace();
-			
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 		} finally {
 			if (null != statement) {
 				statement.close();
@@ -113,7 +85,6 @@ public class ProviderDAOService {
 		}
 	}
 
-<<<<<<< HEAD
 	public boolean updateProvider(int id, int location) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -151,9 +122,9 @@ public class ProviderDAOService {
 
 		return false;
 	}
-	
+
 	public boolean removeProvider(int id) throws SQLException {
-		
+
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -190,7 +161,4 @@ public class ProviderDAOService {
 
 		return false;
 	}
-
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 }

@@ -34,10 +34,7 @@ public class DatabaseService {
         try {
             connection = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
             statement = connection.createStatement();
-<<<<<<< HEAD
             connection.setAutoCommit(false);
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
             //CREATE DATABASE/TABLE IF NOT EXISTS
             String s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Account` (`id` INT auto_increment  PRIMARY KEY,`name` VARCHAR(45) NOT NULL,`email` VARCHAR(45) NOT NULL,`number` VARCHAR(45) NOT NULL,`password` VARCHAR(45) NOT NULL,UNIQUE INDEX `id_UNIQUE` (`id` ASC),UNIQUE INDEX `email_UNIQUE` (`email` ASC));";
             statement.executeUpdate(s);
@@ -45,10 +42,6 @@ public class DatabaseService {
             statement.executeUpdate(s);
             s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`AccountRole` (`idAccount` INT NULL,`idRole` INT NULL,INDEX `idAccountKey_idx` (`idAccount` ASC),INDEX `idRoleKey_idx` (`idRole` ASC, `idAccount` ASC),CONSTRAINT `idAccount` FOREIGN KEY (`idAccount`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION, CONSTRAINT `idRole` FOREIGN KEY (`idRole`) REFERENCES `Barbara_2019143`.`Role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
             statement.executeUpdate(s);
-<<<<<<< HEAD
-=======
-            connection.setAutoCommit(false);
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
             s = "INSERT INTO `Barbara_2019143`.`Role`(`id`,`name`)VALUES(0,'CUSTOMER');";
             statement.executeUpdate(s);
             s = "INSERT INTO `Barbara_2019143`.`Role`(`id`,`name`)VALUES(1,'PROVIDER');";
@@ -59,11 +52,8 @@ public class DatabaseService {
             statement.executeUpdate(s);
             s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Provider` (`idProvider` INT NOT NULL,`location` INT NOT NULL,`Star` INT NOT NULL,PRIMARY KEY (`idProvider`),UNIQUE INDEX `idProvider_UNIQUE` (`idProvider` ASC),CONSTRAINT `idProvider` FOREIGN KEY (`idProvider`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
             statement.executeUpdate(s);
-<<<<<<< HEAD
             s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`DateTimeProvider` (`id` INT NOT NULL AUTO_INCREMENT,`idCustumer` INT NULL,`idProvider` INT NOT NULL,`Year` INT NOT NULL,`Month` INT NOT NULL,`Day` INT NOT NULL,`Hour` INT NOT NULL,`Minute` INT NOT NULL,`Available` INT NOT NULL, `Accept` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `id_UNIQUE` (`id` ASC),INDEX `idCustumer_idx` (`idCustumer` ASC),CONSTRAINT `idCustumer` FOREIGN KEY (`idCustumer`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
             statement.executeUpdate(s);
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
             connection.commit();
             resultSet = statement.getResultSet();
 

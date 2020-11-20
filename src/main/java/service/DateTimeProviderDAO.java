@@ -8,10 +8,8 @@ import java.sql.Statement;
 
 import model.AccountLogged;
 import model.DateTimeProvider;
-<<<<<<< HEAD
 import model.Provider;
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
+
 
 public class DateTimeProviderDAO {
 
@@ -20,13 +18,8 @@ public class DateTimeProviderDAO {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet;
-<<<<<<< HEAD
 
 		AccountLogged.datetimeproviders.clear();
-
-=======
-		
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 		try {
 			connection = DatabaseService.getDBConnection();
 			String query = "SELECT id, idCustumer, idProvider, Year, Month, Day, Hour, Minute, Available FROM DateTimeProvider WHERE Available = "
@@ -60,33 +53,22 @@ public class DateTimeProviderDAO {
 			}
 		}
 	}
-<<<<<<< HEAD
 
-	public boolean saveProvider(int idCustumer, int id) throws SQLException {
-=======
-	
 	public boolean saveProvider(int idCustumer, int id) throws SQLException 
 	{
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = DatabaseService.getDBConnection();
 			connection.setAutoCommit(false);
-<<<<<<< HEAD
 			String query = "UPDATE DateTimeProvider SET idCustumer = ?, Available = 0, Accept = 0 WHERE id = ?;";
-=======
-			String query = "UPDATE DateTimeProvider SET idCustumer = ?, Available = 0 WHERE id = ?;";
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 			statement = connection.prepareStatement(query);
 			statement.setInt(1, idCustumer);
 			statement.setInt(2, id);
 			statement.executeUpdate();
 			connection.commit();
 			resultSet = statement.getResultSet();
-<<<<<<< HEAD
-
 			return true;
 
 		} catch (SQLException exception) {
@@ -170,11 +152,6 @@ public class DateTimeProviderDAO {
 
 			return true;
 
-=======
-			
-			return true;
-			
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 		} catch (SQLException exception) {
 			exception.getMessage();
 			if (null != connection) {
@@ -197,7 +174,6 @@ public class DateTimeProviderDAO {
 		return false;
 	}
 
-<<<<<<< HEAD
 	public boolean updateAcceptProvider(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -313,7 +289,4 @@ public class DateTimeProviderDAO {
 			}
 		}
 	}
-
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 }

@@ -8,13 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import service.AccountDAOService;
 import service.DateTimeProviderDAO;
-<<<<<<< HEAD
 import service.FXMLService;
 import service.ProviderDAOService;
 import service.TransitionService;
-=======
-import service.ProviderDAOService;
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
+
 
 /*
  * Class FXML Controller created
@@ -43,7 +40,6 @@ public class GeneralController {
 	protected DateTimeProviderDAO dateTimeProviderDAO = new DateTimeProviderDAO();
 	
 	protected static int idProvider = -1;
-<<<<<<< HEAD
 	
 	protected void LoadFXML(BorderPane borderT, String toWhere) throws IOException {
 		BorderPane border = FXMLLoaderInit(borderT, FXMLService.TRANSITION_SCREEN, true);
@@ -52,7 +48,5 @@ public class GeneralController {
 
 		TransitionService.PauseTransitionAndSetElement(border, borderLoad, 1);
 	}
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
 }

@@ -7,10 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<<<<<<< HEAD
 <?import javafx.scene.control.Hyperlink?>
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
 <BorderPane fx:id="borderLocation" fx:controller="controller.LocationController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
@@ -38,11 +35,8 @@
             <TextField visible="false" layoutX="84.0" layoutY="309.0" style="-fx-border-color: #1E90FF;" />
             <JFXButton visible="false" layoutX="131.0" layoutY="348.0" prefHeight="31.0" prefWidth="58.0" style="-fx-background-color: #1E90FF;" text="Search" textFill="#5b1d1d" />
             <Label layoutX="106.0" layoutY="161.0" prefHeight="18.0" prefWidth="130.0" text="Select the location" />
-<<<<<<< HEAD
             <Hyperlink onAction="#handleLogoutButtonAction" layoutX="14.0" layoutY="33.0" text="Logout" />
             <Hyperlink onAction="#handleBookingButtonAction" layoutX="14.0" layoutY="8.0" text="Bookings" />
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
          </children>
       </AnchorPane>
    </center>

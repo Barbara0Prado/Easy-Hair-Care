@@ -8,10 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<<<<<<< HEAD
 <?import javafx.scene.control.Hyperlink?>
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
 <BorderPane fx:id="borderDatetime" fx:controller="controller.DateTimeController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
@@ -37,14 +34,11 @@
             <ComboBox fx:id="timePicker" visible="false" layoutX="80.0" layoutY="270.0" prefWidth="150.0"/>
             <Label layoutX="85.0" layoutY="158.0" prefHeight="18.0" prefWidth="141.0" text="Select the day and time" />
             <JFXButton fx:id="buttonBook" onAction="#handleBookButtonAction" visible="false" layoutX="118.0" layoutY="338.0" style="-fx-background-color: #1E90FF;" text="Book now" />
-<<<<<<< HEAD
             <Hyperlink onAction="#handleBookingButtonAction" layoutX="7.0" layoutY="3.0" text="Bookings" />
             <Hyperlink onAction="#handleBackButtonAction" layoutX="7.0" layoutY="22.0" text="Back" />
             <Hyperlink onAction="#handleLogoutButtonAction" layoutX="8.0" layoutY="41.0" text="Logout" />
             <Label fx:id="labelNoTime1" visible="false" layoutX="16.0" layoutY="239.0" prefHeight="18.0" prefWidth="271.0" text="This person does not have any time available" textFill="#ff0505" />
             <Label fx:id="labelNoTime2" visible="false" layoutX="117.0" layoutY="255.0" prefHeight="18.0" prefWidth="171.0" text="at the time" textFill="#ff0505" />
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
          </children>
       </AnchorPane>
    </center>

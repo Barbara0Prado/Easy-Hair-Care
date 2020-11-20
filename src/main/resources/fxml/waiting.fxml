@@ -6,14 +6,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<<<<<<< HEAD
 <?import javafx.scene.control.Hyperlink?>
 
 <BorderPane fx:id="borderConfirmed" fx:controller="controller.ConfirmedController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-=======
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="306.0" style="-fx-background-color: #1E90FF;" BorderPane.alignment="CENTER">
          <children>
@@ -30,10 +25,7 @@
          <children>
             <JFXSpinner layoutX="74.0" layoutY="132.0" prefHeight="108.0" prefWidth="159.0" />
             <Label layoutX="38.0" layoutY="273.0" prefHeight="18.0" prefWidth="259.0" text="Awaiting for review by the administrator" textFill="#0884cd" />
-<<<<<<< HEAD
              <Hyperlink onAction="#handleLogoutButtonAction" layoutX="7.0" layoutY="3.0" text="Logout" />
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
          </children>
       </AnchorPane>
    </center>

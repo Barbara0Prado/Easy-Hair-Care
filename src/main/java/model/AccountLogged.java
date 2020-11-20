@@ -17,9 +17,6 @@ public class AccountLogged
 	public static List<Provider> providers = new ArrayList<>();
 	
 	public static List<DateTimeProvider> datetimeproviders = new ArrayList<>();
-<<<<<<< HEAD
 	
 	public static List<AdminAcceptProvider> adminAcceptProviders = new ArrayList<>();
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 }

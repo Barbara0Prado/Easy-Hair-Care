@@ -7,10 +7,7 @@ public class DateTimeProvider implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-<<<<<<< HEAD
 	private String providerName;
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 	private int idCustumer;
 	private int idProvider;
 	private int Year;
@@ -74,13 +71,10 @@ public class DateTimeProvider implements Serializable {
 	public void setAvailable(int available) {
 		Available = available;
 	}
-<<<<<<< HEAD
 	public String getProviderName() {
 		return providerName;
 	}
 	public void setProviderName(String providerName) {
 		this.providerName = providerName;
 	}
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 }

@@ -16,10 +16,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
-<<<<<<< HEAD
 import javafx.scene.control.Label;
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import model.AccountLogged;
@@ -39,15 +36,12 @@ public class DateTimeController extends GeneralController {
 
 	@FXML
 	private JFXButton buttonBook;
-<<<<<<< HEAD
 	
 	@FXML
 	private Label labelNoTime1;
 	
 	@FXML
 	private Label labelNoTime2;
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
 	private boolean blockDatePicker = false;
 
@@ -72,10 +66,6 @@ public class DateTimeController extends GeneralController {
 				dateFormat.year = Integer.parseInt(value.substring(0, 4));
 				dateFormat.month = Integer.parseInt(value.substring(5, 7));
 				dateFormat.day = Integer.parseInt(value.substring(8, 10));
-<<<<<<< HEAD
-=======
-
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 				return true;
 			}
 		}
@@ -98,24 +88,18 @@ public class DateTimeController extends GeneralController {
 
 	@FXML
 	protected void initialize() throws SQLException {
-<<<<<<< HEAD
 		
 		options.clear();
 		
 		timePicker.valueProperty().set(null);
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
 		dateTimeProviderDAO.selectAllProviders(1, idProvider);
 
 		if (AccountLogged.datetimeproviders.size() < 1) {
-<<<<<<< HEAD
 			
 			 labelNoTime1.setVisible(true);
 			 labelNoTime2.setVisible(true);
-=======
 			// set error message (does not have any day)
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 			return;
 		}
 
@@ -194,7 +178,6 @@ public class DateTimeController extends GeneralController {
 		});
 
 	}
-<<<<<<< HEAD
 	
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) throws IOException {
@@ -213,8 +196,6 @@ public class DateTimeController extends GeneralController {
     	LoadFXML(borderDatetime, FXMLService.CANCELDATEANDTIME);
     	
     }
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
 	@FXML
 	protected void handleBookButtonAction(ActionEvent event) throws SQLException, IOException {
@@ -229,9 +210,7 @@ public class DateTimeController extends GeneralController {
 					if (dateTimeProviderDAO.saveProvider(AccountLogged.accountId,
 							AccountLogged.datetimeproviders.get(i).getId()) == true) {
 
-<<<<<<< HEAD
 						LoadFXML(borderDatetime, FXMLService.CONFIRMED);
-=======
 						BorderPane border = FXMLLoaderInit(borderDatetime, FXMLService.TRANSITION_SCREEN, true);
 
 						/*
@@ -240,7 +219,6 @@ public class DateTimeController extends GeneralController {
 						final BorderPane borderSignup = FXMLLoaderInit(border, FXMLService.CONFIRMED, false);
 
 						TransitionService.PauseTransitionAndSetElement(border, borderSignup, 1);
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 					}
 				}
 			}

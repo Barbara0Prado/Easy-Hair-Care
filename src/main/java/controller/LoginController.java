@@ -110,10 +110,7 @@ public class LoginController extends GeneralController {
 			error = true;
 		}
 		if (passwordField.getLength() < MIN_CHARACTER) {
-<<<<<<< HEAD
 			this.accountLabel.setVisible(true);
-=======
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 			error = true;
 		}
 
@@ -129,9 +126,7 @@ public class LoginController extends GeneralController {
 			{
 				if(AccountLogged.accountRole == 0)
 				{
-<<<<<<< HEAD
 					LoadFXML(borderLogin, FXMLService.LOCATION_SCREEN);
-=======
 			        BorderPane border = FXMLLoaderInit(borderLogin, FXMLService.TRANSITION_SCREEN, true);
 			        
 			        /*
@@ -144,14 +139,12 @@ public class LoginController extends GeneralController {
 					 * Pause transition while change all the components FXML
 			         */
 			        TransitionService.PauseTransitionAndSetElement(border, borderSignup, 1);
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 				}
 				else if(AccountLogged.accountRole == 1)
 				{
 					
 					if(AccountLogged.accountAccepted == 0)
 					{
-<<<<<<< HEAD
 						LoadFXML(borderLogin, FXMLService.WAITING_SCREEN);
 					}
 					else
@@ -164,22 +157,10 @@ public class LoginController extends GeneralController {
 				{
 					LoadFXML(borderLogin, FXMLService.ADMIN_ACCEPT);
 				}
-=======
-				        BorderPane border = FXMLLoaderInit(borderLogin, FXMLService.TRANSITION_SCREEN, true);
-				        
-				        /*
-				         * Check later 
-				         */
-				        final BorderPane borderSignup = FXMLLoaderInit(border, FXMLService.WAITING_SCREEN, false);
-				        
-
-				        /*
-						 * Pause transition while change all the components FXML
-				         */
-				        TransitionService.PauseTransitionAndSetElement(border, borderSignup, 1);
-					}
+					
 					else
 					{
+					
 				        BorderPane border = FXMLLoaderInit(borderLogin, FXMLService.TRANSITION_SCREEN, true);
 				        
 				        /*
@@ -195,17 +176,13 @@ public class LoginController extends GeneralController {
 					}
 			        
 				}
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 			}
 			else
 			{
 				connectButton.setDisable(false);
 			}
 			
-			
-		}
-
-	}
+} 
 
     /*
 	 * Handle button method created to be used when somebody clicks on it and goes
@@ -214,22 +191,7 @@ public class LoginController extends GeneralController {
     @FXML
     protected void handleCreateButtonAction(ActionEvent event) throws IOException {
 
-<<<<<<< HEAD
     	LoadFXML(borderLogin, FXMLService.SIGNUP_SCREEN);
-=======
-        BorderPane border = FXMLLoaderInit(borderLogin, FXMLService.TRANSITION_SCREEN, true);
-        
-        /*
-         * Check later 
-         */
-        final BorderPane borderSignup = FXMLLoaderInit(border, FXMLService.SIGNUP_SCREEN, false);
-        
-
-        /*
-		 * Pause transition while change all the components FXML
-         */
-        TransitionService.PauseTransitionAndSetElement(border, borderSignup, 1);
->>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
     }
 
