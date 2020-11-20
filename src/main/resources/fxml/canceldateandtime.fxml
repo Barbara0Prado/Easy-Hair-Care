@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="borderCancel" fx:controller="controller.CancelDateController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="306.0" style="-fx-background-color: #1E90FF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="103.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="scissors.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="316.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="114.0" layoutX="105.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="calendar.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="89.0" layoutY="158.0" prefHeight="18.0" prefWidth="141.0" text="View your bookings" />
+            <JFXButton onAction="#handleCancelButtonAction" visible="false" fx:id="dateButton" layoutX="103.0" layoutY="295.0" prefHeight="32.0" prefWidth="103.0" style="-fx-background-color: #FF6347;" text="Cancel" textFill="#000000ea" />
+            <ComboBox fx:id="comboBoxDate" layoutX="12.0" layoutY="229.0" prefHeight="28.0" prefWidth="273.0" />
+            <Hyperlink onAction="#handleNewBookingButtonAction" layoutX="7.0" layoutY="3.0" text="New Booking" />
+            <Hyperlink onAction="#handlelogoutButtonAction" layoutX="8.0" layoutY="25.0" text="Logout" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -13,8 +13,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import service.LocFxml;
-import service.Transition;
+import service.FXMLService;
+import service.TransitionService;
 
 public class Loading extends Application {
 
@@ -24,7 +24,7 @@ public class Loading extends Application {
         /*
 		 * Reading the loading.fxml It contains the splash screen
          */
-        Parent root = FXMLLoader.load(getClass().getResource(LocFxml.LOADING_SCREEN));
+        Parent root = FXMLLoader.load(getClass().getResource(FXMLService.LOADING_SCREEN));
         Scene scene = new Scene(root);
         /*
 		 * Removed buttons and disabled resizable by using mouse
@@ -60,7 +60,7 @@ public class Loading extends Application {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setController(new LoginController());
                 try {
-                    root = FXMLLoader.load(getClass().getResource(LocFxml.LOGIN_SCREEN));
+                    root = FXMLLoader.load(getClass().getResource(FXMLService.LOGIN_SCREEN));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

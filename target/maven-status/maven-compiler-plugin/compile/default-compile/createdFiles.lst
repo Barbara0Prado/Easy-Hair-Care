@@ -1,5 +1,4 @@
 controller\SignUpController$3.class
-service\Transition.class
 main\EasyCareMain.class
 controller\SignUpController.class
 controller\LoginController.class
@@ -8,6 +7,4 @@ controller\SignUpController$4.class
 view\Loading.class
 controller\SignUpController$2.class
 controller\SignUpController$1.class
-service\Database.class
 view\Loading$1.class
-service\Transition$1.class
