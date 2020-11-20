@@ -8,8 +8,11 @@ import java.sql.Statement;
 
 import model.Account;
 import model.AccountLogged;
+<<<<<<< HEAD
 import model.AdminAcceptProvider;
 import model.Provider;
+=======
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
 public class AccountDAOService {
 	
@@ -126,6 +129,10 @@ public class AccountDAOService {
 					resultSet = statement.executeQuery();
 					
 					if(resultSet.next()) {
+<<<<<<< HEAD
+=======
+						System.out.print(resultSet.getInt(1));
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 					    AccountLogged.accountAccepted = resultSet.getInt(1);
 					}
 				}
@@ -148,4 +155,9 @@ public class AccountDAOService {
 
 		return false;
 	}
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 }

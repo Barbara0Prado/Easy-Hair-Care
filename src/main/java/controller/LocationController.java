@@ -24,7 +24,18 @@ public class LocationController extends GeneralController {
     
     void Load() throws IOException
     {
+<<<<<<< HEAD
     	LoadFXML(borderLocation, FXMLService.DUBLIN_SCREEN);
+=======
+        BorderPane border = FXMLLoaderInit(borderLocation, FXMLService.TRANSITION_SCREEN, true);
+        
+        /*
+         * Check later 
+         */
+        final BorderPane borderSignup = FXMLLoaderInit(border, FXMLService.DUBLIN_SCREEN, false);
+        
+        TransitionService.PauseTransitionAndSetElement(border, borderSignup, 1);
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
     }
     
     @FXML
@@ -41,6 +52,7 @@ public class LocationController extends GeneralController {
     	
     	Load();
     }
+<<<<<<< HEAD
     
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) throws IOException {
@@ -53,4 +65,8 @@ public class LocationController extends GeneralController {
     	LoadFXML(borderLocation, FXMLService.CANCELDATEANDTIME);
     	
     }
+=======
+
+
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 }

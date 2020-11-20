@@ -179,6 +179,7 @@ public class SignUpController extends GeneralController {
 	 */
 	@FXML
 	protected void handleToggleButtonAction(ActionEvent event) throws IOException {
+<<<<<<< HEAD
 
 		if (toggleField.isSelected()) {
 
@@ -208,6 +209,24 @@ public class SignUpController extends GeneralController {
 		final BorderPane borderSignup = FXMLLoaderInit(border, FXMLService.LOGIN_SCREEN, false);
 
 		TransitionService.SetElement(border, borderSignup);
+=======
+
+		if (toggleField.isSelected()) {
+
+			ObservableList<String> options = FXCollections.observableArrayList("DUBLIN SOUTH", "DUBLIN NORTH");
+
+			comboField.setValue("Location");
+			comboField.setItems(options);
+
+			comboField.setVisible(true);
+			signUpButton.relocate(81, 357);
+
+		} else {
+			this.locationLabel.setVisible(false);
+			comboField.setVisible(false);
+			signUpButton.relocate(83, 322);
+		}
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 
 	}
 
@@ -278,10 +297,29 @@ public class SignUpController extends GeneralController {
 
 				BorderPane border = FXMLLoaderInit(borderSignUp, FXMLService.TRANSITION_SCREEN, true);
 
+<<<<<<< HEAD
 				if (toggleField.isSelected()) {
 					LoadFXML(borderSignUp, FXMLService.WAITING_SCREEN);
 				} else {
 					LoadFXML(borderSignUp, FXMLService.LOCATION_SCREEN);
+=======
+				/*
+				 * Check later
+				 */
+				if (toggleField.isSelected()) {
+					final BorderPane borderWaiting = FXMLLoaderInit(border, FXMLService.WAITING_SCREEN, false);
+					/*
+					 * Pause transition while change all the components FXML
+					 */
+					TransitionService.PauseTransitionAndSetElement(border, borderWaiting, 1);
+				} else {
+					final BorderPane borderLocation = FXMLLoaderInit(border, FXMLService.LOCATION_SCREEN, false);
+
+					/*
+					 * Pause transition while change all the components FXML
+					 */
+					TransitionService.PauseTransitionAndSetElement(border, borderLocation, 1);
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
 				}
 
 			} else {

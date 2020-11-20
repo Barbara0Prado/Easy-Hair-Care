@@ -66,7 +66,10 @@
             <Label fx:id="passwordLabel" visible="false" layoutX="84.0" layoutY="269.0" prefHeight="18.0" prefWidth="233.0" text="You must enter a valid password" textFill="RED" />
             <Label fx:id="locationLabel" visible="false" layoutX="85.0" layoutY="303.0" prefHeight="18.0" prefWidth="233.0" text="You must select the location" textFill="RED" />
             <Label fx:id="AccountExistsLabel" visible="false" layoutX="80.0" layoutY="14.0" prefHeight="18.0" prefWidth="220.0" text="This account already exists!" textFill="RED" />
+<<<<<<< HEAD
             <Hyperlink onAction="#handleSignInButtonAction" layoutX="12.0" layoutY="1.0" text="Sign in" />
+=======
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
          </children>
       </AnchorPane>
    </center>

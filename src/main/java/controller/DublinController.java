@@ -47,10 +47,13 @@ public class DublinController extends GeneralController {
     @FXML
     protected void initialize() throws SQLException, IOException, InterruptedException {
     	
+<<<<<<< HEAD
     	options.clear();
     	
     	comboBoxHairBarber.valueProperty().set(null);
     	
+=======
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
     	providerDAOService.selectAllProviders(AccountLogged.accountLocation);
     	
     	for(int i = 0; i < AccountLogged.providers.size(); i++)
@@ -123,6 +126,7 @@ public class DublinController extends GeneralController {
         	}
         }
 		
+<<<<<<< HEAD
     	LoadFXML(borderDublin, FXMLService.DATETIME_SCREEN);
 	}
 	
@@ -143,5 +147,16 @@ public class DublinController extends GeneralController {
     	LoadFXML(borderDublin, FXMLService.CANCELDATEANDTIME);
     	
     }
+=======
+        BorderPane border = FXMLLoaderInit(borderDublin, FXMLService.TRANSITION_SCREEN, true);
+        
+        /*
+         * Check later 
+         */
+        final BorderPane borderSignup = FXMLLoaderInit(border, FXMLService.DATETIME_SCREEN, false);
+        
+        TransitionService.PauseTransitionAndSetElement(border, borderSignup, 1);
+	}
+>>>>>>> f9d2338dbf78c078c22c386fa38fd32dcfdef2d5
  
 }
