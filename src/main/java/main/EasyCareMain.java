@@ -1,17 +1,17 @@
 package main;
 
 import javafx.application.Application;
-import view.Loading;
+import view.SplashScreen;
 
 public class EasyCareMain {
 
     public static void main(String[] args) {
 
-        new Loading();
+        new SplashScreen();
         /*
 		 * Interface loading (first initial splash screen)
          */
-        Application.launch(Loading.class, args);
+        Application.launch(SplashScreen.class, args);
     }
 
 }

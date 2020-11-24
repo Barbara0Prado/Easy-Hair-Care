@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 
+/*
+ * Provider class
+ */
 public class Provider implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
