@@ -17,14 +17,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import model.UserLogged;
 import service.PathFXMLService;
-import service.GeneralAnimationService;
 
 public class ViewProviderController extends PublicClassController {
 
@@ -120,7 +118,7 @@ public class ViewProviderController extends PublicClassController {
 	 * Combobox action (set stars according to provider stars)
 	 */
 	@FXML
-	protected void handleComboBoxAction(ActionEvent event) {
+	protected void handleComboBoxAction(ActionEvent event) throws SQLException {
 		this.star1.setVisible(false);
 		this.star2.setVisible(false);
 		this.star3.setVisible(false);
@@ -130,26 +128,28 @@ public class ViewProviderController extends PublicClassController {
 		for (int i = 0; i < UserLogged.providers.size(); i++) {
 			if (comboBox.getValue().equalsIgnoreCase(UserLogged.providers.get(i).getName())) {
 				buttonChoose.setVisible(true);
-
-				if (UserLogged.providers.get(i).getStar() == 1) {
+				
+				int totalStar = reviewDaoService.selectAllStars(UserLogged.providers.get(i).getIdProvider());
+				
+				if (totalStar == 1) {
 					this.star1.setVisible(true);
 				}
-				if (UserLogged.providers.get(i).getStar() == 2) {
+				if (totalStar == 2) {
 					this.star1.setVisible(true);
 					this.star2.setVisible(true);
 				}
-				if (UserLogged.providers.get(i).getStar() == 3) {
+				if (totalStar == 3) {
 					this.star1.setVisible(true);
 					this.star2.setVisible(true);
 					this.star3.setVisible(true);
 				}
-				if (UserLogged.providers.get(i).getStar() == 4) {
+				if (totalStar == 4) {
 					this.star1.setVisible(true);
 					this.star2.setVisible(true);
 					this.star3.setVisible(true);
 					this.star4.setVisible(true);
 				}
-				if (UserLogged.providers.get(i).getStar() == 5) {
+				if (totalStar == 5) {
 					this.star1.setVisible(true);
 					this.star2.setVisible(true);
 					this.star3.setVisible(true);

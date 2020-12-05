@@ -20,18 +20,15 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import model.UserLogged;
 import service.PathFXMLService;
-import service.GeneralAnimationService;
 
 public class NewBooking extends PublicClassController {
 
@@ -99,15 +96,16 @@ public class NewBooking extends PublicClassController {
 			@Override
 			public void updateItem(LocalDate item, boolean empty) {
 				setDisable(true);
-				setStyle(
-						"-fx-text-fill: WHITE; -fx-background-color: #1C1C1C; -fx-background-radius: 30; -fx-border-radius: 30;");
+				setStyle("-fx-text-fill: WHITE; -fx-background-color: #1C1C1C; -fx-background-radius: 30; -fx-border-radius: 30;");
 				setBackground(new Background(new BackgroundFill(Color.web("#1C1C1C"), CornerRadii.EMPTY, null)));
 				super.updateItem(item, empty);
 				for (int i = 0; i < UserLogged.dates.size(); i++) {
-					if (item.isEqual(LocalDate.of(UserLogged.dates.get(i).getYear(), UserLogged.dates.get(i).getMonth(),
+					if (item.isBefore(LocalDate.now()) || item.isEqual(LocalDate.now())) {
+						setDisable(true);
+					}
+					else if (item.isEqual(LocalDate.of(UserLogged.dates.get(i).getYear(), UserLogged.dates.get(i).getMonth(),
 							UserLogged.dates.get(i).getDay()))) {
-						setStyle(
-								"-fx-text-fill: BLACK; -fx-background-color: KHAKI; -fx-background-radius: 30; -fx-border-radius: 30;");
+						setStyle("-fx-text-fill: BLACK; -fx-background-color: KHAKI; -fx-background-radius: 30; -fx-border-radius: 30;");
 						setDisable(false);
 					}
 				}

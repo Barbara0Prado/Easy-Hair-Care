@@ -5,8 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/*
+ * NotificationService class
+ */
 public class NotificationService {
 	
+	/*
+	 * Get notification
+	 */
 	public int getNotification(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -39,6 +45,9 @@ public class NotificationService {
 		return 0;
 	}
 	
+	/*
+	 * Delete notification
+	 */
 	public void deleteNotification(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;

@@ -8,11 +8,15 @@ import java.sql.Statement;
 
 import model.UserLogged;
 import model.Dates;
-import model.Provider;
 
-
+/*
+ * DateDaoService class
+ */
 public class DatesDaoService {
 
+	/*
+	 * Get all the providers from database
+	 */
 	public void selectAllProviders(int available, int idProvider) throws SQLException {
 
 		Connection connection = null;
@@ -53,7 +57,10 @@ public class DatesDaoService {
 			}
 		}
 	}
-	
+
+	/*
+	 * Get all the dates
+	 */
 	public void selectAllProvidersDates(int idProvider) throws SQLException {
 
 		Connection connection = null;
@@ -61,10 +68,11 @@ public class DatesDaoService {
 		ResultSet resultSet;
 
 		UserLogged.dates.clear();
-		
+
 		try {
 			connection = ConnectSQLService.getDBConnection();
-			String query = "SELECT id, idCustumer, idProvider, Year, Month, Day, Hour, Minute, Available, Accept FROM DateTimeProvider WHERE Available = 1 AND idProvider = "+idProvider+" AND Accept = 0";
+			String query = "SELECT id, idCustumer, idProvider, Year, Month, Day, Hour, Minute, Available, Accept FROM DateTimeProvider WHERE Available = 1 AND idProvider = "
+					+ idProvider + " AND Accept = 0";
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
 			while (resultSet.next()) {
@@ -95,7 +103,10 @@ public class DatesDaoService {
 			}
 		}
 	}
-	
+
+	/*
+	 * Insert hours
+	 */
 	public boolean addProviderHours(int id, Dates dateTimeProvider) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -140,8 +151,10 @@ public class DatesDaoService {
 		return false;
 	}
 
-	public boolean addBookingByCustumer(int idCustumer, int id) throws SQLException 
-	{
+	/*
+	 * Booking by customer
+	 */
+	public boolean addBookingByCustumer(int idCustumer, int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -179,6 +192,9 @@ public class DatesDaoService {
 		return false;
 	}
 
+	/*
+	 * Get all bookings
+	 */
 	public void selectAllBookings(int id) throws SQLException {
 
 		Connection connection = null;
@@ -189,7 +205,7 @@ public class DatesDaoService {
 
 		try {
 			connection = ConnectSQLService.getDBConnection();
-			String query = "SELECT Account.name, DateTimeProvider.id, DateTimeProvider.idProvider, DateTimeProvider.Year, DateTimeProvider.Month, DateTimeProvider.Day, DateTimeProvider.Hour, DateTimeProvider.Minute FROM DateTimeProvider INNER JOIN Account ON DateTimeProvider.idProvider = Account.id WHERE Available = 0 and idCustumer = "
+			String query = "SELECT Account.name, DateTimeProvider.id, DateTimeProvider.idProvider, DateTimeProvider.Year, DateTimeProvider.Month, DateTimeProvider.Day, DateTimeProvider.Hour, DateTimeProvider.Minute, DateTimeProvider.Accept FROM DateTimeProvider INNER JOIN Account ON DateTimeProvider.idProvider = Account.id WHERE Available = 0 and idCustumer = "
 					+ id;
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
@@ -204,6 +220,7 @@ public class DatesDaoService {
 				provider.setDay(resultSet.getInt(6));
 				provider.setHour(resultSet.getInt(7));
 				provider.setMinute(resultSet.getInt(8));
+				provider.setAccept(resultSet.getInt(9));
 				provider.setAvailable(0);
 				UserLogged.dates.add(provider);
 			}
@@ -221,7 +238,10 @@ public class DatesDaoService {
 			}
 		}
 	}
-	
+
+	/*
+	 * Get all dates from provider
+	 */
 	public void selectAllDatesFromProvider(int id) throws SQLException {
 
 		Connection connection = null;
@@ -263,6 +283,9 @@ public class DatesDaoService {
 		}
 	}
 
+	/*
+	 * Cancel booking
+	 */
 	public boolean cancelBooking(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -300,7 +323,10 @@ public class DatesDaoService {
 
 		return false;
 	}
-	
+
+	/*
+	 * Delete date
+	 */
 	public boolean deleteDate(int year, int month, int day, int hour) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -343,6 +369,132 @@ public class DatesDaoService {
 		return false;
 	}
 
+	/*
+	 * Person did not show up (update)
+	 */
+	public boolean updateNoShowUpProvider(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = ConnectSQLService.getDBConnection();
+			connection.setAutoCommit(false);
+			String query = "UPDATE DateTimeProvider SET Available = 0, Accept = -3 WHERE id = ?;";
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+			connection.commit();
+			resultSet = statement.getResultSet();
+
+			return true;
+
+		} catch (SQLException exception) {
+			exception.getMessage();
+			if (null != connection) {
+				connection.rollback();
+			}
+		} finally {
+			if (null != resultSet) {
+				resultSet.close();
+			}
+
+			if (null != statement) {
+				statement.close();
+			}
+
+			if (null != connection) {
+				connection.close();
+			}
+		}
+
+		return false;
+	}
+
+	/*
+	 * Showed up (update)
+	 */
+	public boolean updateShowedUpProvider(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = ConnectSQLService.getDBConnection();
+			connection.setAutoCommit(false);
+			String query = "UPDATE DateTimeProvider SET Available = 0, Accept = -2 WHERE id = ?";
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+			connection.commit();
+			resultSet = statement.getResultSet();
+
+			return true;
+
+		} catch (SQLException exception) {
+			exception.getMessage();
+			if (null != connection) {
+				connection.rollback();
+			}
+		} finally {
+			if (null != resultSet) {
+				resultSet.close();
+			}
+
+			if (null != statement) {
+				statement.close();
+			}
+
+			if (null != connection) {
+				connection.close();
+			}
+		}
+
+		return false;
+	}
+
+	/*
+	 * Set finished and close to review by customer
+	 */
+	public boolean finishedAndCloseReview(int id) throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = ConnectSQLService.getDBConnection();
+			connection.setAutoCommit(false);
+			String query = "UPDATE DateTimeProvider SET Available = 0, Accept = -4 WHERE id = ?";
+			statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			statement.executeUpdate();
+			connection.commit();
+			resultSet = statement.getResultSet();
+
+			return true;
+
+		} catch (SQLException exception) {
+			exception.getMessage();
+			if (null != connection) {
+				connection.rollback();
+			}
+		} finally {
+			if (null != resultSet) {
+				resultSet.close();
+			}
+
+			if (null != statement) {
+				statement.close();
+			}
+
+			if (null != connection) {
+				connection.close();
+			}
+		}
+
+		return false;
+	}
+
+	/*
+	 * Update accept provider
+	 */
 	public boolean updateAcceptProvider(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -381,6 +533,9 @@ public class DatesDaoService {
 		return false;
 	}
 
+	/*
+	 * Deny booking
+	 */
 	public boolean updateDenyProvider(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -419,6 +574,9 @@ public class DatesDaoService {
 		return false;
 	}
 
+	/*
+	 * Get all bookings from provider
+	 */
 	public void selectAllProviderBookings(int id) throws SQLException {
 
 		Connection connection = null;
@@ -429,7 +587,7 @@ public class DatesDaoService {
 
 		try {
 			connection = ConnectSQLService.getDBConnection();
-			String query = "SELECT DateTimeProvider.id, DateTimeProvider.Year, DateTimeProvider.Month, DateTimeProvider.Day, DateTimeProvider.Hour, DateTimeProvider.Minute, Account.name  FROM DateTimeProvider INNER JOIN Account ON DateTimeProvider.idCustumer = Account.id WHERE Available = 0 AND Accept = 0 AND DateTimeProvider.idProvider = "
+			String query = "SELECT DateTimeProvider.id, DateTimeProvider.Year, DateTimeProvider.Month, DateTimeProvider.Day, DateTimeProvider.Hour, DateTimeProvider.Minute, DateTimeProvider.idCustumer, Account.name  FROM DateTimeProvider INNER JOIN Account ON DateTimeProvider.idCustumer = Account.id WHERE Available = 0 AND Accept = 0 AND DateTimeProvider.idProvider = "
 					+ id;
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
@@ -441,7 +599,8 @@ public class DatesDaoService {
 				provider.setDay(resultSet.getInt(4));
 				provider.setHour(resultSet.getInt(5));
 				provider.setMinute(resultSet.getInt(6));
-				provider.setProviderName(resultSet.getString(7));
+				provider.setIdCustumer(resultSet.getInt(7));
+				provider.setProviderName(resultSet.getString(8));
 				UserLogged.dates.add(provider);
 			}
 

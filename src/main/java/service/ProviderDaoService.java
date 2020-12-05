@@ -10,10 +10,16 @@ import model.UserLogged;
 import model.Admin;
 import model.Provider;
 
+/*
+ * ProviderDaoService class
+ */
 public class ProviderDaoService {
 
-public void selectAllProviders(int location) throws SQLException {
-		
+	/*
+	 * Get all providers by location
+	 */
+	public void selectAllProviders(int location) throws SQLException {
+
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet;
@@ -22,17 +28,16 @@ public void selectAllProviders(int location) throws SQLException {
 
 		try {
 			connection = ConnectSQLService.getDBConnection();
-			String query = "SELECT Account.id, Provider.star, Account.name  FROM Provider INNER JOIN Account ON Provider.idProvider = Account.id where Provider.location = " + location;
+			String query = "SELECT Account.id, Account.name FROM Provider INNER JOIN Account ON Provider.idProvider = Account.id where Provider.location = "
+					+ location;
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);
-			while(resultSet.next()) 
-			{
+			while (resultSet.next()) {
 				Provider provider = new Provider();
-				
+
 				provider.setIdProvider(resultSet.getInt(1));
 				provider.setLocation(location);
-				provider.setStar(resultSet.getInt(2));
-				provider.setName(resultSet.getString(3));
+				provider.setName(resultSet.getString(2));
 				UserLogged.providers.add(provider);
 			}
 
@@ -48,8 +53,11 @@ public void selectAllProviders(int location) throws SQLException {
 				connection.close();
 			}
 		}
-}
+	}
 
+	/*
+	 * Get all providers
+	 */
 	public void selectAllProviders() throws SQLException {
 
 		Connection connection = null;
@@ -85,7 +93,10 @@ public void selectAllProviders(int location) throws SQLException {
 		}
 	}
 
-	public boolean updateProvider(int id, int location) throws SQLException {
+	/*
+	 * Update provider
+	 */
+	public boolean updateProvider(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
@@ -123,6 +134,9 @@ public void selectAllProviders(int location) throws SQLException {
 		return false;
 	}
 
+	/*
+	 * Remove provider
+	 */
 	public boolean removeProvider(int id) throws SQLException {
 
 		Connection connection = null;

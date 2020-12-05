@@ -1,6 +1,5 @@
 package controller.custumer;
 
-import java.awt.Insets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
@@ -16,28 +15,23 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 import model.User;
 import model.UserLogged;
 import service.PathFXMLService;
-import service.GeneralAnimationService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class SignUpController extends PublicClassController {
 
@@ -95,7 +89,6 @@ public class SignUpController extends PublicClassController {
 		 */
 		nameField.textProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
 				if (nameField.getLength() >= MIN_CHARACTER && nameField.getLength() <= MAX_CHARACTER) {
 					nameLabel.setVisible(false);
 				} else {
@@ -280,7 +273,10 @@ public class SignUpController extends PublicClassController {
 			account.setName(nameField.getText());
 			account.setEmail(emailField.getText());
 			account.setNumber(phoneField.getText());
-			account.setPassword(passwordField.getText());
+			/*
+			 * Password hashed/encrypted/salted
+			 */
+			account.setPassword(new BCryptPasswordEncoder().encode(passwordField.getText()));
 
 			/*
 			 * Insert into sql and get key generated
@@ -297,8 +293,6 @@ public class SignUpController extends PublicClassController {
 
 				account.setId(key);
 				int i = accountDAOService.saveAccountRole(account, toggleField.isSelected() ? 1 : 0);
-
-				System.out.print(i);
 
 				if (toggleField.isSelected()) {
 					LoadFXMLWithSpinner(vbox,PathFXMLService.AWAITING_SCREEN);

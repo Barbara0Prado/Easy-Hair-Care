@@ -13,7 +13,7 @@
 
 <VBox fx:id="vbox" fx:controller="controller.custumer.NewBooking" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="302.0" BorderPane.alignment="CENTER">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="316.0" style="-fx-background-color: #1C1C1C;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="316.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="98.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
                <image>

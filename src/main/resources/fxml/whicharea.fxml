@@ -12,7 +12,7 @@
 
  <VBox fx:id="vbox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.custumer.WhichAreaController" prefHeight="400.0" prefWidth="302.0" BorderPane.alignment="CENTER">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="316.0" style="-fx-background-color: #1C1C1C;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="316.0" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="buttonSouth" onAction="#handleSouthButtonAction"  layoutX="83.0" layoutY="196.0" prefHeight="32.0" prefWidth="154.0" style="-fx-background-color: #1C1C1C; -fx-border-color: #F0E68C; -fx-background-radius: 30; -fx-border-radius: 30;" text="Dublin South" textFill="#FFFFFF" />
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="105.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
@@ -27,7 +27,6 @@
             <Label layoutX="106.0" layoutY="161.0" prefHeight="18.0" prefWidth="130.0" textFill="KHAKI" text="Select the location" />
             <Hyperlink onAction="#handleLogoutButtonAction"  layoutX="14.0" layoutY="33.0" text="Logout" textFill="KHAKI" />
             <Hyperlink  onAction="#handleBookingButtonAction" layoutX="14.0" layoutY="8.0" text="Bookings" textFill="KHAKI" />
-            <Hyperlink  onAction="#handleReviewButtonAction" layoutX="14.0" layoutY="58.0" text="Review" textFill="KHAKI" />
          </children>
       </AnchorPane>
     </children>

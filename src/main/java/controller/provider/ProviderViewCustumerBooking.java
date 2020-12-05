@@ -17,18 +17,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
+import model.Review;
 import model.UserLogged;
 import service.PathFXMLService;
-import service.GeneralAnimationService;
 
 public class ProviderViewCustumerBooking extends PublicClassController {
 
@@ -49,17 +47,66 @@ public class ProviderViewCustumerBooking extends PublicClassController {
 
 	@FXML
 	private Label labelNoCustumer;
+	
+	@FXML
+	private ImageView star1;
+	
+	@FXML
+	private ImageView star2;
+	
+	@FXML
+	private ImageView star3;
+	
+	@FXML
+	private ImageView star4;
+	
+	@FXML
+	private ImageView star5;
+	
+	private int totalStar = 0;
 
 	private ObservableList<String> options = FXCollections.observableArrayList();
 
 	@FXML
 	protected void initialize() throws SQLException, IOException, InterruptedException {
-
+	
 		options.clear();
 
 		comboBox.valueProperty().set(null);
 
+		totalStar = reviewDaoService.selectAllStars(UserLogged.userId);
 		dateTimeProviderDAO.selectAllProviderBookings(UserLogged.userId);
+		
+		switch(totalStar)
+		{
+		case 1:
+			star1.setVisible(true);
+			break;
+		case 2:
+			star1.setVisible(true);
+			star2.setVisible(true);
+			break;
+		case 3: 
+			star1.setVisible(true);
+			star2.setVisible(true);
+			star3.setVisible(true);
+			break;
+		case 4: 
+			star1.setVisible(true);
+			star2.setVisible(true);
+			star3.setVisible(true);
+			star4.setVisible(true);
+			break;
+		case 5:
+			star1.setVisible(true);
+			star2.setVisible(true);
+			star3.setVisible(true);
+			star4.setVisible(true);
+			star5.setVisible(true);
+			break;
+			default:
+			break;
+		}
 
 		/*
 		 * Check if there is dates to accept
@@ -89,7 +136,11 @@ public class ProviderViewCustumerBooking extends PublicClassController {
 
 			compose += " - " + UserLogged.dates.get(i).getProviderName();
 
-			options.add(i, compose);
+			if (day <= LocalDate.now().getDayOfMonth() && month == LocalDate.now().getMonthValue()) {
+				options.add(i, compose + " - Is it Done?");
+			} else {
+				options.add(i, compose);
+			}
 		}
 
 		comboBox.setItems(options);
@@ -102,6 +153,26 @@ public class ProviderViewCustumerBooking extends PublicClassController {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
 				if (comboBox.getValue() != null) {
+
+					for (int i = 0; i < UserLogged.dates.size(); i++) {
+						int day = UserLogged.dates.get(i).getDay();
+						int month = UserLogged.dates.get(i).getMonth();
+
+						if (options.get(i).equalsIgnoreCase(comboBox.getValue())) {
+							if (day <= LocalDate.now().getDayOfMonth() && month == LocalDate.now().getMonthValue()) {
+								buttonAccept.setText("Yes");
+								buttonAccept.setVisible(true);
+								buttonDeny.setText("No");
+								buttonDeny.setVisible(true);
+							} else {
+								buttonAccept.setText("Accept");
+								buttonAccept.setVisible(true);
+								buttonDeny.setText("Deny");
+								buttonDeny.setVisible(true);
+							}
+						}
+
+					}
 					buttonAccept.setVisible(true);
 					buttonDeny.setVisible(true);
 
@@ -109,17 +180,6 @@ public class ProviderViewCustumerBooking extends PublicClassController {
 					buttonAccept.setVisible(false);
 					buttonDeny.setVisible(false);
 				}
-				
-				for (int i = 0; i < UserLogged.dates.size(); i++) {
-					if(dateFormat.dateFormatString(LocalDate.now().minusDays(1).toString()) == true)
-					{
-						if(UserLogged.dates.get(i).getDay() == dateFormat.getDay())
-						{
-							System.out.print("fdfd");
-						}
-					}
-				}
-
 			}
 		});
 		/*
@@ -134,7 +194,8 @@ public class ProviderViewCustumerBooking extends PublicClassController {
 					protected void updateItem(String item, boolean empty) {
 						super.updateItem(item, empty);
 						setStyle("-fx-text-fill: WHITE;");
-						setBackground(new Background(new BackgroundFill(Color.web("#1C1C1C"), CornerRadii.EMPTY, null)));
+						setBackground(
+								new Background(new BackgroundFill(Color.web("#1C1C1C"), CornerRadii.EMPTY, null)));
 						setText(item);
 					}
 
@@ -151,12 +212,31 @@ public class ProviderViewCustumerBooking extends PublicClassController {
 	@FXML
 	protected void handleAcceptButtonAction(ActionEvent event) throws IOException, SQLException, InterruptedException {
 
-		if (comboBox.getValue() != null) {
+		if (buttonAccept.getText().equalsIgnoreCase("Yes")) {
+
+			Review review = new Review();
 
 			for (int i = 0; i < UserLogged.dates.size(); i++) {
 				if (options.get(i).equalsIgnoreCase(comboBox.getValue())) {
-					if (dateTimeProviderDAO.updateAcceptProvider(UserLogged.dates.get(i).getId()) == true) {
-						initialize();
+					review.setIdDate(UserLogged.dates.get(i).getId());
+					review.setIdAccountReview(UserLogged.dates.get(i).getIdCustumer());
+					review.setIdProviderReview(UserLogged.userId);
+					reviewDaoService.insertReview(review);
+					dateTimeProviderDAO.updateShowedUpProvider(UserLogged.dates.get(i).getId());
+					UserLogged.dates.remove(i);
+					options.remove(i);
+				}
+			}
+
+		} else {
+
+			if (comboBox.getValue() != null) {
+
+				for (int i = 0; i < UserLogged.dates.size(); i++) {
+					if (options.get(i).equalsIgnoreCase(comboBox.getValue())) {
+						if (dateTimeProviderDAO.updateAcceptProvider(UserLogged.dates.get(i).getId()) == true) {
+							initialize();
+						}
 					}
 				}
 			}
@@ -169,15 +249,29 @@ public class ProviderViewCustumerBooking extends PublicClassController {
 	@FXML
 	protected void handleDenyButtonAction(ActionEvent event) throws IOException, SQLException, InterruptedException {
 
-		if (comboBox.getValue() != null) {
-
+		if (buttonDeny.getText().equalsIgnoreCase("No")) {
 			for (int i = 0; i < UserLogged.dates.size(); i++) {
 				if (options.get(i).equalsIgnoreCase(comboBox.getValue())) {
-					if (dateTimeProviderDAO.updateDenyProvider(UserLogged.dates.get(i).getId()) == true) {
+					if (dateTimeProviderDAO.updateNoShowUpProvider(UserLogged.dates.get(i).getId()) == true) {
 						/*
 						 * initialize method invoke
 						 */
 						initialize();
+					}
+				}
+			}
+
+		} else {
+			if (comboBox.getValue() != null) {
+
+				for (int i = 0; i < UserLogged.dates.size(); i++) {
+					if (options.get(i).equalsIgnoreCase(comboBox.getValue())) {
+						if (dateTimeProviderDAO.updateDenyProvider(UserLogged.dates.get(i).getId()) == true) {
+							/*
+							 * initialize method invoke
+							 */
+							initialize();
+						}
 					}
 				}
 			}

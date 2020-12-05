@@ -1,8 +1,7 @@
 package service;
 
-/**
- *
- * @author marcos
+/*
+ * Path FXML files
  */
 public class PathFXMLService {
     

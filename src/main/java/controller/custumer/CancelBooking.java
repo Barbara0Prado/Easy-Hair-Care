@@ -2,6 +2,7 @@ package controller.custumer;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -38,7 +39,7 @@ public class CancelBooking extends PublicClassController {
 
 	@FXML
 	private ComboBox<String> comboBox;
-	
+
 	@FXML
 	private Label labelNoBooking;
 
@@ -58,12 +59,12 @@ public class CancelBooking extends PublicClassController {
 		 * Clear options
 		 */
 		options.clear();
-		
+
 		/*
 		 * Message there is no bookings
 		 */
-		if(UserLogged.dates.size() < 1)
-		{
+		
+		if (UserLogged.dates.size() < 1) {
 			comboBox.setVisible(false);
 			labelNoBooking.setVisible(true);
 			return;
@@ -77,6 +78,7 @@ public class CancelBooking extends PublicClassController {
 		/*
 		 * Build a string with name and date/time
 		 */
+		
 		for (int i = 0; i < UserLogged.dates.size(); i++) {
 			int hour = UserLogged.dates.get(i).getHour();
 			int minute = UserLogged.dates.get(i).getMinute();
@@ -92,8 +94,50 @@ public class CancelBooking extends PublicClassController {
 			compose += minute < 10 ? "0" + minute : "" + minute;
 
 			compose += " - " + UserLogged.dates.get(i).getProviderName();
-
-			options.add(i, compose);
+			
+			if(day <= LocalDate.now().getDayOfMonth() && month == LocalDate.now().getMonthValue()) {
+				if(UserLogged.dates.get(i).getAccept() == -4)
+				{
+					options.add(i, compose + " - review submitted");
+				}
+				else if(UserLogged.dates.get(i).getAccept() == -3)
+				{
+					options.add(i, compose + " - missed");
+				}
+				else if(UserLogged.dates.get(i).getAccept() == -2)
+				{
+					options.add(i, compose + " - submit a review");
+				}
+				else
+				{
+					options.add(i, compose + " - cannot cancel");
+				}
+			}
+			else
+			{
+				if(UserLogged.dates.get(i).getAccept() == -4)
+				{
+					options.add(i, compose + " - review submitted");
+				}
+				else if(UserLogged.dates.get(i).getAccept() == -3)
+				{
+					options.add(i, compose + " - missed");
+				}
+				else if(UserLogged.dates.get(i).getAccept() == -2)
+				{
+					options.add(i, compose + " - submit a review");
+				}
+				else if(UserLogged.dates.get(i).getAccept() == 0)
+				{
+                	//System.out.println(UserLogged.dates.get(i).getProviderName());
+					options.add(i, compose);
+				}
+                else if(UserLogged.dates.get(i).getAccept() == 1)
+				{
+                	//System.out.println(UserLogged.dates.get(i).getProviderName());
+					options.add(i, compose);
+				}
+			}
 		}
 
 		/*
@@ -109,7 +153,44 @@ public class CancelBooking extends PublicClassController {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
 				if (comboBox.getValue() != null) {
-					dateButton.setVisible(true);
+					for (int i = 0; i < UserLogged.dates.size(); i++) {
+						int day = UserLogged.dates.get(i).getDay();
+						int month = UserLogged.dates.get(i).getMonth();
+						
+						if (options.get(i).equalsIgnoreCase(comboBox.getValue()))
+						{
+						if(UserLogged.dates.get(i).getAccept() == -2)
+						{
+							try {
+								LoadFXMLWithSpinner(vbox, PathFXMLService.REVIEW_SCREEN);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							return;
+						}
+						}
+						
+						if (options.get(i).equalsIgnoreCase(comboBox.getValue()))
+						{
+							if (day <= LocalDate.now().getDayOfMonth() && month == LocalDate.now().getMonthValue()) {
+								dateButton.setVisible(false);
+							}
+							else
+							{
+								int accept = UserLogged.dates.get(i).getAccept();
+								
+								if(accept == -4 || accept == -3 || accept == -2)
+								{
+								   dateButton.setVisible(false);
+								}
+								else
+								{
+									dateButton.setVisible(true);
+								}
+							}
+						}
+						
+					}
 
 				} else {
 					dateButton.setVisible(false);
@@ -152,7 +233,7 @@ public class CancelBooking extends PublicClassController {
 			for (int i = 0; i < UserLogged.dates.size(); i++) {
 				if (options.get(i).equalsIgnoreCase(comboBox.getValue())) {
 					dateTimeProviderDAO.cancelBooking(UserLogged.dates.get(i).getId());
-					LoadFXMLWithSpinner(vbox,PathFXMLService.BOOKING_CANCELLED_SCREEN);
+					LoadFXMLWithSpinner(vbox, PathFXMLService.BOOKING_CANCELLED_SCREEN);
 				}
 			}
 		}
@@ -163,7 +244,7 @@ public class CancelBooking extends PublicClassController {
 	 */
 	@FXML
 	protected void handleLogoutButtonAction(ActionEvent event) throws IOException {
-		LoadFXMLWithSpinner(vbox,PathFXMLService.LOGIN_SCREEN);
+		LoadFXMLWithSpinner(vbox, PathFXMLService.LOGIN_SCREEN);
 	}
 
 	/*
@@ -171,7 +252,7 @@ public class CancelBooking extends PublicClassController {
 	 */
 	@FXML
 	protected void handleNewBookingButtonAction(ActionEvent event) throws IOException {
-		LoadFXMLWithSpinner(vbox,PathFXMLService.WHICHAREA_SCREEN);
+		LoadFXMLWithSpinner(vbox, PathFXMLService.WHICHAREA_SCREEN);
 	}
 
 }

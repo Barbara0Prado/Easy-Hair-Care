@@ -17,8 +17,6 @@ public class ConnectSQLService {
     private static final String CONNECTION = "jdbc:mysql://52.50.23.197:3306/";
     private static final String USER = "Barbara_2019143";
     private static final String PASSWORD = "2019143";
-    
-   
 
     private ConnectSQLService() {
 
@@ -51,7 +49,7 @@ public class ConnectSQLService {
             statement.executeUpdate(s);
             s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`AccountWaiting` ( `id` INT NOT NULL,`location` INT NOT NULL,`accepted` TINYINT NOT NULL, UNIQUE INDEX `id_UNIQUE` (`id` ASC), PRIMARY KEY (`id`), CONSTRAINT `id` FOREIGN KEY (`id`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
             statement.executeUpdate(s);
-            s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Provider` (`idProvider` INT NOT NULL,`location` INT NOT NULL,`Star` INT NOT NULL,PRIMARY KEY (`idProvider`),UNIQUE INDEX `idProvider_UNIQUE` (`idProvider` ASC),CONSTRAINT `idProvider` FOREIGN KEY (`idProvider`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
+            s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`Provider` (`idProvider` INT NOT NULL,`location` INT NOT NULL,PRIMARY KEY (`idProvider`),UNIQUE INDEX `idProvider_UNIQUE` (`idProvider` ASC),CONSTRAINT `idProvider` FOREIGN KEY (`idProvider`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
             statement.executeUpdate(s);
             s = "CREATE TABLE IF NOT EXISTS `Barbara_2019143`.`DateTimeProvider` (`id` INT NOT NULL AUTO_INCREMENT,`idCustumer` INT NULL,`idProvider` INT NOT NULL,`Year` INT NOT NULL,`Month` INT NOT NULL,`Day` INT NOT NULL,`Hour` INT NOT NULL,`Minute` INT NOT NULL,`Available` INT NOT NULL, `Accept` INT NOT NULL,PRIMARY KEY (`id`),UNIQUE INDEX `id_UNIQUE` (`id` ASC),INDEX `idCustumer_idx` (`idCustumer` ASC),CONSTRAINT `idCustumer` FOREIGN KEY (`idCustumer`) REFERENCES `Barbara_2019143`.`Account` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION);";
             statement.executeUpdate(s);

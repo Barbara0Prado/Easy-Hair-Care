@@ -179,8 +179,8 @@ public class ProviderRemoveDate extends PublicClassController {
 	 * Remove date button
 	 */
 	@FXML
-	protected void handleRemoveDateButtonAction(ActionEvent event) throws IOException {
-		LoadFXMLWithSpinner(vbox,PathFXMLService.PROVIDER_REMOVE_DATE_SCREEN);
+	protected void handleBookingButtonAction(ActionEvent event) throws IOException {
+		LoadFXMLWithSpinner(vbox,PathFXMLService.PROVIDER_VIEW_CUSTUMER_BOOKING_SCREEN);
 	}
 
 }

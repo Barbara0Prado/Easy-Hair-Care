@@ -13,7 +13,7 @@
 
 <VBox fx:id="vbox" fx:controller="controller.provider.DateTimeProviderAdd" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="302.0" BorderPane.alignment="CENTER">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="316.0" style="-fx-background-color: #1C1C1C;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="316.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="101.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -23,7 +23,7 @@
              <JFXDatePicker fx:id="datePicker" defaultColor="KHAKI" layoutX="60.0" layoutY="156.0" nodeOrientation="INHERIT" style="-fx-text-fill: WHITE; -fx-background-color: #1C1C1C; -fx-border-color: KHAKI; -fx-background-radius: 30; -fx-border-radius: 30;" visible="true" />
             <Label layoutX="90.0" layoutY="125.0" prefHeight="18.0" prefWidth="141.0" text="Select the day and time" textFill="KHAKI" />
             <Hyperlink layoutX="7.0" layoutY="3.0" onAction="#handleRemoveBookingButtonAction" text="Remove date" textFill="KHAKI" />
-            <Hyperlink layoutX="7.0" layoutY="22.0" onAction="#handleViewBookingButtonAction" text="View bookings" textFill="KHAKI" />
+            <Hyperlink layoutX="7.0" layoutY="22.0" onAction="#handleViewBookingButtonAction" text="View Booking" textFill="KHAKI" />
             <Hyperlink layoutX="8.0" layoutY="41.0" onAction="#handleLogoutButtonAction" text="Logout" textFill="KHAKI" />
             <Label fx:id="labelNoTime1" layoutX="16.0" layoutY="239.0" prefHeight="18.0" prefWidth="271.0" text="This person does not have any time available" textFill="KHAKI" visible="false" />
             <Label fx:id="labelNoTime2" layoutX="117.0" layoutY="255.0" prefHeight="18.0" prefWidth="171.0" text="at the time" textFill="KHAKI" visible="false" />

@@ -11,14 +11,16 @@ END$$
 
 DELIMITER ;
 
-DELIMITER //
+DELIMITER $$
 
 CREATE TRIGGER after_waiting_update
 AFTER UPDATE
 ON AccountWaiting FOR EACH ROW
 BEGIN
-        INSERT INTO Provider(idProvider,location,star)
-        VALUES(old.id, old.location, 1);
+        INSERT INTO Provider(idProvider,location)
+        VALUES(old.id, old.location);
+		INSERT INTO Review(idAccountReview,IdProviderReview,StarGiven)
+        VALUES(old.id, old.id, 1);
 END$$ 
 
 DELIMITER ;

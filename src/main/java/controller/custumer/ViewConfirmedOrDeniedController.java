@@ -1,19 +1,15 @@
 package controller.custumer;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import animatefx.animation.Bounce;
 import controller.PublicClassController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import service.PathFXMLService;
-import service.GeneralAnimationService;
 
 public class ViewConfirmedOrDeniedController extends PublicClassController {
 

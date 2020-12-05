@@ -18,7 +18,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -144,8 +143,7 @@ public class AdminViewProviderController extends PublicClassController {
 
 			for (int i = 0; i < UserLogged.adminAcceptProviders.size(); i++) {
 				if (comboBox.getValue() == options.get(i)) {
-					if (providerDAOService.updateProvider(UserLogged.adminAcceptProviders.get(i).getId(),
-							UserLogged.adminAcceptProviders.get(i).getLocation()) == true) {
+					if (providerDAOService.updateProvider(UserLogged.adminAcceptProviders.get(i).getId()) == true) {
 						initialize();
 					}
 				}

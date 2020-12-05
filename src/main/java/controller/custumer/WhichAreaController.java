@@ -12,14 +12,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.UserLogged;
 import service.PathFXMLService;
-import service.GeneralAnimationService;
 
 public class WhichAreaController extends PublicClassController {
 
@@ -100,13 +96,5 @@ public class WhichAreaController extends PublicClassController {
 	@FXML
 	protected void handleBookingButtonAction(ActionEvent event) throws IOException {
 		LoadFXMLWithSpinner(vbox,PathFXMLService.CANCEL_BOOKING_SCREEN);
-	}
-	
-	/*
-	 * Review button
-	 */
-	@FXML
-	protected void handleReviewButtonAction(ActionEvent event) throws IOException {
-		LoadFXMLWithSpinner(vbox,PathFXMLService.REVIEW_SCREEN);
 	}
 }

@@ -45,9 +45,4 @@ public class User implements Serializable {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
-	//class Role
-	//{
-	//	
-	//}
 }

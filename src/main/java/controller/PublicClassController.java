@@ -7,10 +7,7 @@ import java.util.regex.Pattern;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import service.UserDaoService;
@@ -18,37 +15,15 @@ import service.DatesDaoService;
 import service.PathFXMLService;
 import service.NotificationService;
 import service.ProviderDaoService;
-import service.GeneralAnimationService;
+import service.ReviewDaoService;
 
 /*
  * Class PublicClassController created
  */
 public class PublicClassController {
-	
-	@FXML
-	protected BorderPane border;
-
 	/*
 	 * Load FXML and change all the elements
 	 */
-	protected BorderPane FXMLLoaderInit(BorderPane border, String PathFXML, boolean setAll) throws IOException {
-		BorderPane newBorder = FXMLLoader.load(getClass().getResource(PathFXML));
-		if (setAll == true) {
-			border.getChildren().setAll(newBorder);
-		}
-		return newBorder;
-	}
-	
-	//test
-	protected VBox FXMLLoaderInitA(VBox p, String PathFXML, boolean setAll) throws IOException {
-		VBox newBorder = FXMLLoader.load(getClass().getResource(PathFXML));
-		if (setAll == true) {
-			//border.getChildren().setAll(anchorPaneRight);
-			border.getChildren().addAll(newBorder);
-		}
-		return newBorder;
-	}
-	
 	protected void LoadFXMLWithSpinner(VBox vbox, String PathFXML) throws IOException {
 		
 		VBox spin = FXMLLoader.load(getClass().getResource(PathFXMLService.SPINNER_SCREEN));
@@ -67,21 +42,6 @@ public class PublicClassController {
 		});
 		pause.play();
 	}
-	//test end
-
-	/*
-	 * Load FXML (spinner) and new FXML
-	 */
-	protected void LoadFXML(BorderPane borderT, String PathFXML) throws IOException {
-		//BorderPane newBorder = FXMLLoaderInit(borderT, PathFXMLService.SPINNER_SCREEN, true);
-
-		//final BorderPane afterLoad = FXMLLoaderInit(newBorder, PathFXML, false);
-
-		/*
-		 * Pause transition while load new screen
-		 */
-		//GeneralAnimationService.PauseTransitionAndSetElementWithSpinner(newBorder, afterLoad, Duration.seconds(2));
-	}
 
 	protected final int MIN_CHARACTER = 10;
 	protected final int MAX_CHARACTER = 35;
@@ -99,6 +59,7 @@ public class PublicClassController {
 	protected ProviderDaoService providerDAOService = new ProviderDaoService();
 	protected DatesDaoService dateTimeProviderDAO = new DatesDaoService();
 	protected NotificationService notificationService = new NotificationService();
+	protected ReviewDaoService reviewDaoService = new ReviewDaoService();
 
 	/*
 	 * DateFormat class (convert date into string with -)
@@ -179,4 +140,6 @@ public class PublicClassController {
 	}
 
 	public DateFormat dateFormat = new DateFormat();
+	
+	public static boolean threadStarted = false;
 }

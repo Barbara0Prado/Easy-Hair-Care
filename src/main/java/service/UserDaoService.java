@@ -6,14 +6,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import model.User;
 import model.UserLogged;
-import model.Admin;
-import model.Provider;
 
 
+/*
+ * UserDaoService class
+ */
 public class UserDaoService {
 	
+	/*
+	 * New account
+	 */
 	public int newAccount(User account, boolean toggle, int location) throws SQLException 
 	{
 		Connection connection = null;
@@ -72,6 +78,9 @@ public class UserDaoService {
 		return 0;
 	}
 	
+	/*
+	 * Save role
+	 */
 	public int saveAccountRole(User account, int role) throws SQLException 
 	{
 		Connection connection = null;
@@ -108,6 +117,9 @@ public class UserDaoService {
 		return 0;
 	}
 	
+	/*
+	 * Check if userExists
+	 */
 	public boolean AccountExists(String email, String password) throws SQLException {
 		Connection connection = null;
 		PreparedStatement statement = null;
@@ -116,10 +128,9 @@ public class UserDaoService {
 		try {
 			connection = ConnectSQLService.getDBConnection();
 			connection.setAutoCommit(false);
-			String query = "SELECT Account.id, AccountRole.idRole FROM AccountRole INNER JOIN Account ON AccountRole.idAccount = Account.id where Account.email = ? and Account.password = ?";
+			String query = "SELECT Account.id, AccountRole.idRole, Account.password FROM AccountRole INNER JOIN Account ON AccountRole.idAccount = Account.id where Account.email = ?";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, email);
-			statement.setString(2, password);
 			ResultSet resultSet = statement.executeQuery();
 			if(resultSet.next()) {
 				UserLogged.userId = resultSet.getInt(1);
@@ -136,7 +147,14 @@ public class UserDaoService {
 					    UserLogged.userAccepted = resultSet.getInt(1);
 					}
 				}
-				return true;
+				
+				/*
+				 * Check password encrypted
+				 */
+				if(new BCryptPasswordEncoder().matches(password, resultSet.getString(3)))
+				{
+					return true;
+				}
 			}
 
 			return false;

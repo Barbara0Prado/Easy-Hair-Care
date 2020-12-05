@@ -12,8 +12,7 @@ public class Provider implements Serializable {
 	private int idProvider;
 	private int location;
 	private String name;
-	private int star;
-	
+
 	public int getIdProvider() {
 		return idProvider;
 	}
@@ -31,12 +30,6 @@ public class Provider implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public int getStar() {
-		return star;
-	}
-	public void setStar(int star) {
-		this.star = star;
 	}
 
 }
