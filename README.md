@@ -5,6 +5,8 @@ Easy Hair Care booking system, build with JAVAFX as a part of assignment from ou
 
 Used technologies.
 
+User friendly interface, 3 mains colors used: yellow (khaki), dark grey and grey
+
 - JAVAFX
 - SPRING SECURITY
 - MYSQL 
