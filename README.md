@@ -3,8 +3,6 @@ Java Project of a Booking System Application.
 
 Easy Hair Care booking system, build with JAVAFX as a part of assignment from our college.
 
-Used technologies.
-
 User friendly interface, 3 mains colors used: yellow (khaki), dark grey and grey
 
 - JAVAFX
