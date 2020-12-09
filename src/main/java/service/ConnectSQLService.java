@@ -14,9 +14,9 @@ public class ConnectSQLService {
      */
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String NAME = "Barbara_2019143";
-    private static final String CONNECTION = "jdbc:mysql://52.50.23.197:3306/";
-    private static final String USER = "Barbara_2019143";
-    private static final String PASSWORD = "2019143";
+    private static final String CONNECTION = "jdbc:mysql://ip:3306/";
+    private static final String USER = "user";
+    private static final String PASSWORD = "pass";
 
     private ConnectSQLService() {
 
